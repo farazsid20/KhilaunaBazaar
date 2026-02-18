@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - KhilaunaBazaar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold text-primary" href="index.html">
+                <i class="fas fa-cube"></i> KhilaunaBazaar
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown">Categories</a>
+                        <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
+                            <li><a class="dropdown-item" href="categories/action-figures.html">Action Figures</a></li>
+                            <li><a class="dropdown-item" href="categories/dolls.html">Dolls & Accessories</a></li>
+                            <li><a class="dropdown-item" href="categories/building-blocks.html">Building Blocks</a></li>
+                            <li><a class="dropdown-item" href="categories/outdoor-toys.html">Outdoor Toys</a></li>
+                            <li><a class="dropdown-item" href="categories/board-games.html">Board Games</a></li>
+                            <li><a class="dropdown-item" href="categories/stuffed-animals.html">Stuffed Animals</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                </ul>
+                <a href="cart.html" class="btn btn-outline-primary ms-3 position-relative">
+                    <i class="fas fa-shopping-cart"></i> Cart
+                    <span class="position-absolute top-0 start-100 translate-middle badge bg-danger cart-count" id="cartCount">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <section class="py-3 bg-light">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#" id="categoryLink">Category</a></li>
+                    <li class="breadcrumb-item active" id="productName">Product</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Product Details -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-5">
+                <!-- Product Image -->
+                <div class="col-lg-5">
+                    <div class="img-placeholder" style="height: 500px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px;">
+                        <span style="font-size: 18px;">640 x 640px (1:1 Square)</span>
+                    </div>
+                    <div class="row g-2 mt-3">
+                        <div class="col-3">
+                            <div class="img-placeholder bg-secondary" style="height: 100px; border-radius: 8px;">
+                                <span style="font-size: 10px;">Image 2</span>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="img-placeholder bg-secondary" style="height: 100px; border-radius: 8px;">
+                                <span style="font-size: 10px;">Image 3</span>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="img-placeholder bg-secondary" style="height: 100px; border-radius: 8px;">
+                                <span style="font-size: 10px;">Image 4</span>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="img-placeholder bg-secondary" style="height: 100px; border-radius: 8px;">
+                                <span style="font-size: 10px;">Image 5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="col-lg-7">
+                    <h1 id="detailProductName" class="display-6 fw-bold mb-2">Product Name</h1>
+                    
+                    <div class="mb-3">
+                        <span class="badge bg-success me-2">★ 4.5</span>
+                        <span class="text-muted">12 Reviews</span>
+                    </div>
+
+                    <h3 id="detailPrice" class="text-primary mb-4">$29.99</h3>
+
+                    <div class="mb-4">
+                        <h6 class="mb-2">Description:</h6>
+                        <p id="detailDescription" class="text-muted">
+                            High-quality product description goes here with all the important features and benefits.
+                        </p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h6 class="mb-3">Features:</h6>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> High-quality material</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Age appropriate</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Educational value</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Durable design</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-4">
+                        <h6 class="mb-3">Specifications:</h6>
+                        <table class="table table-sm">
+                            <tr>
+                                <td><strong>SKU:</strong></td>
+                                <td id="productSKU">KB-001-001</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Category:</strong></td>
+                                <td id="productCategory">Toys</td>
+                            </tr>
+                            <tr>
+                                <td><strong>In Stock:</strong></td>
+                                <td><span class="badge bg-success">Yes</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Warranty:</strong></td>
+                                <td>1 Year</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="mb-4">
+                        <h6 class="mb-3">Quantity:</h6>
+                        <div class="d-flex align-items-center gap-2">
+                            <button class="btn btn-outline-primary" id="decreaseQty" onclick="decreaseQty()">−</button>
+                            <input type="number" id="quantity" class="form-control" style="width: 100px; text-align: center;" value="1" min="1">
+                            <button class="btn btn-outline-primary" id="increaseQty" onclick="increaseQty()">+</button>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-3">
+                        <button class="btn btn-primary btn-lg" id="addToCartBtn" onclick="addProductToCart()">
+                            <i class="fas fa-shopping-cart me-2"></i> Add to Cart
+                        </button>
+                        <button class="btn btn-outline-secondary btn-lg">
+                            <i class="fas fa-heart me-2"></i> Add to Wishlist
+                        </button>
+                    </div>
+
+                    <!-- Trust Badges -->
+                    <div class="row g-3 mt-4 pt-4 border-top">
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-shield-alt text-primary me-3" style="font-size: 24px;"></i>
+                                <div>
+                                    <h6 class="mb-0">Secure Payment</h6>
+                                    <small class="text-muted">100% protected</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-undo text-primary me-3" style="font-size: 24px;"></i>
+                                <div>
+                                    <h6 class="mb-0">Easy Returns</h6>
+                                    <small class="text-muted">30-day policy</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-truck text-primary me-3" style="font-size: 24px;"></i>
+                                <div>
+                                    <h6 class="mb-0">Fast Shipping</h6>
+                                    <small class="text-muted">5-7 business days</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-headset text-primary me-3" style="font-size: 24px;"></i>
+                                <div>
+                                    <h6 class="mb-0">24/7 Support</h6>
+                                    <small class="text-muted">Dedicated help</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reviews Section -->
+            <div class="row mt-5 pt-5 border-top">
+                <div class="col-lg-8">
+                    <h3 class="mb-4">Customer Reviews</h3>
+                    
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h6 class="mb-1">Excellent product!</h6>
+                                <small class="text-warning">★★★★★</small>
+                                <p class="text-muted small mt-1">By John Doe • 2 weeks ago</p>
+                            </div>
+                        </div>
+                        <p class="text-muted">Very satisfied with this product. Great quality and fast delivery.</p>
+                    </div>
+
+                    <hr>
+
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h6 class="mb-1">Good value for money</h6>
+                                <small class="text-warning">★★★★</small>
+                                <p class="text-muted small mt-1">By Jane Smith • 1 month ago</p>
+                            </div>
+                        </div>
+                        <p class="text-muted">Kids love it. Durable and well-made. Highly recommended.</p>
+                    </div>
+
+                    <hr>
+
+                    <button class="btn btn-outline-primary">Load More Reviews</button>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body">
+                            <h6 class="mb-4">Rating Summary</h6>
+                            
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <small>5 Stars</small>
+                                    <small>60%</small>
+                                </div>
+                                <div class="progress" style="height: 8px;">
+                                    <div class="progress-bar bg-success" style="width: 60%"></div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <small>4 Stars</small>
+                                    <small>30%</small>
+                                </div>
+                                <div class="progress" style="height: 8px;">
+                                    <div class="progress-bar bg-success" style="width: 30%"></div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <small>3 Stars</small>
+                                    <small>8%</small>
+                                </div>
+                                <div class="progress" style="height: 8px;">
+                                    <div class="progress-bar bg-warning" style="width: 8%"></div>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <button class="btn btn-primary w-100 btn-sm">Write a Review</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5 mt-5">
+        <div class="container">
+            <div class="row g-4 mb-4">
+                <div class="col-md-6 col-lg-3">
+                    <h5><i class="fas fa-cube text-primary"></i> KhilaunaBazaar</h5>
+                    <p class="text-muted small">Your one-stop shop for the best kids toys and games.</p>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <h6>Quick Links</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="#" class="text-muted text-decoration-none">About Us</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Privacy Policy</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <h6>Categories</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="categories/action-figures.html" class="text-muted text-decoration-none">Action Figures</a></li>
+                        <li><a href="categories/dolls.html" class="text-muted text-decoration-none">Dolls</a></li>
+                        <li><a href="categories/building-blocks.html" class="text-muted text-decoration-none">Building Blocks</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <h6>Contact Us</h6>
+                    <ul class="list-unstyled small">
+                        <li class="text-muted"><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li class="text-muted"><i class="fas fa-envelope"></i> support@khilaunabazaar.com</li>
+                        <li class="mt-3">
+                            <a href="#" class="text-muted me-3"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="text-muted me-3"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-muted"><i class="fab fa-instagram"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="bg-secondary">
+            <div class="text-center text-muted small">
+                <p>&copy; 2026 KhilaunaBazaar. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        function increaseQty() {
+            const input = document.getElementById('quantity');
+            input.value = parseInt(input.value) + 1;
+        }
+
+        function decreaseQty() {
+            const input = document.getElementById('quantity');
+            if (parseInt(input.value) > 1) {
+                input.value = parseInt(input.value) - 1;
+            }
+        }
+
+        function addProductToCart() {
+            const product = JSON.parse(sessionStorage.getItem('selectedProduct'));
+            const quantity = parseInt(document.getElementById('quantity').value);
+
+            if (product) {
+                for (let i = 0; i < quantity; i++) {
+                    addToCart(product.id, product.name, product.price);
+                }
+                showNotification(`${quantity} x ${product.name} added to cart!`, 'success');
+                document.getElementById('quantity').value = 1;
+            }
+        }
+
+        // Load product details
+        document.addEventListener('DOMContentLoaded', function() {
+            const product = JSON.parse(sessionStorage.getItem('selectedProduct'));
+            
+            if (product) {
+                document.getElementById('detailProductName').textContent = product.name;
+                document.getElementById('detailPrice').textContent = '$' + product.price.toFixed(2);
+                document.getElementById('detailDescription').textContent = product.description;
+                document.getElementById('productName').textContent = product.name;
+                updateCartCount();
+            } else {
+                // Redirect if no product selected
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>
