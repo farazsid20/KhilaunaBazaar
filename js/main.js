@@ -202,7 +202,7 @@ function loadProductsByCategory(category) {
                         <div class="mb-2">
                             <span class="badge bg-success">★ ${product.rating}</span>
                         </div>
-                        <h5 class="text-primary mb-3">$${product.price.toFixed(2)}</h5>
+                        <h5 class="text-primary mb-3">₹${product.price.toFixed(2)}</h5>
                         <div class="d-grid gap-2">
                             <button class="btn btn-primary btn-sm" onclick="addToCart(${product.id}, '${product.name}', ${product.price})">
                                 <i class="fas fa-shopping-cart"></i> Add to Cart

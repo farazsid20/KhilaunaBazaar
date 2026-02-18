@@ -97,7 +97,7 @@
                         <span class="text-muted">12 Reviews</span>
                     </div>
 
-                    <h3 id="detailPrice" class="text-primary mb-4">$29.99</h3>
+                    <h3 id="detailPrice" class="text-primary mb-4">₹29.99</h3>
 
                     <div class="mb-4">
                         <h6 class="mb-2">Description:</h6>
@@ -359,7 +359,7 @@
             
             if (product) {
                 document.getElementById('detailProductName').textContent = product.name;
-                document.getElementById('detailPrice').textContent = '$' + product.price.toFixed(2);
+                document.getElementById('detailPrice').textContent = '₹' + product.price.toFixed(2);
                 document.getElementById('detailDescription').textContent = product.description;
                 document.getElementById('productName').textContent = product.name;
                 updateCartCount();

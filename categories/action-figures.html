@@ -70,9 +70,9 @@
                     <div class="d-flex gap-2 flex-wrap">
                         <select class="form-select form-select-sm" style="max-width: 150px;" onchange="filterProducts(this.value)">
                             <option value="">All Prices</option>
-                            <option value="0-25">Under $25</option>
-                            <option value="25-40">$25 - $40</option>
-                            <option value="40-100">Above $40</option>
+                            <option value="0-25">Under ₹25</option>
+                            <option value="25-40">₹25 - ₹40</option>
+                            <option value="40-100">Above ₹40</option>
                         </select>
                         <select class="form-select form-select-sm" style="max-width: 150px;" onchange="sortProducts(this.value)">
                             <option value="">Sort By</option>
@@ -211,7 +211,7 @@
                                 <div class="mb-2">
                                     <span class="badge bg-success">★ ${product.rating}</span>
                                 </div>
-                                <h5 class="text-primary mb-3">$${product.price.toFixed(2)}</h5>
+                                <h5 class="text-primary mb-3">₹${product.price.toFixed(2)}</h5>
                                 <div class="d-grid gap-2">
                                     <button class="btn btn-primary btn-sm" onclick="addToCart(${product.id}, '${product.name}', ${product.price})">
                                         <i class="fas fa-shopping-cart"></i> Add to Cart
