@@ -1,0 +1,100 @@
+@inherits LayoutComponentBase
+@implements IDisposable
+@inject KhilaunaBazaar.Client.Services.CartService Cart
+@inject NavigationManager Nav
+
+<div class="page">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
+        <div class="container-fluid">
+            <NavLink class="navbar-brand fw-bold text-primary" href="/">
+                <i class="fas fa-cube"></i> KhilaunaBazaar
+            </NavLink>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">Home</NavLink>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
+                        <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
+                            <li><NavLink class="dropdown-item" href="/category/action-figures">Action Figures</NavLink></li>
+                            <li><NavLink class="dropdown-item" href="/category/dolls">Dolls & Accessories</NavLink></li>
+                            <li><NavLink class="dropdown-item" href="/category/building-blocks">Building Blocks</NavLink></li>
+                            <li><NavLink class="dropdown-item" href="/category/outdoor-toys">Outdoor Toys</NavLink></li>
+                            <li><NavLink class="dropdown-item" href="/category/board-games">Board Games</NavLink></li>
+                            <li><NavLink class="dropdown-item" href="/category/stuffed-animals">Stuffed Animals</NavLink></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="/contact">Contact</NavLink>
+                    </li>
+                </ul>
+                <NavLink href="/cart" class="btn btn-outline-primary ms-3 position-relative">
+                    <i class="fas fa-shopping-cart"></i> Cart
+                    @if (Cart.Count > 0)
+                    {
+                        <span class="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-pill">@Cart.Count</span>
+                    }
+                </NavLink>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow-1">
+        @Body
+    </main>
+
+    <footer class="bg-dark text-white py-5 mt-5">
+        <div class="container">
+            <div class="row g-4 mb-4">
+                <div class="col-md-6 col-lg-3">
+                    <h5><i class="fas fa-cube text-primary"></i> KhilaunaBazaar</h5>
+                    <p class="text-muted small">Your one-stop shop for the best kids toys and games.</p>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <h6>Quick Links</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="#" class="text-muted text-decoration-none">About Us</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Privacy Policy</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <h6>Categories</h6>
+                    <ul class="list-unstyled small">
+                        <li><NavLink href="/category/action-figures" class="text-muted text-decoration-none">Action Figures</NavLink></li>
+                        <li><NavLink href="/category/dolls" class="text-muted text-decoration-none">Dolls</NavLink></li>
+                        <li><NavLink href="/category/building-blocks" class="text-muted text-decoration-none">Building Blocks</NavLink></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <h6>Contact Us</h6>
+                    <ul class="list-unstyled small">
+                        <li class="text-muted mb-2"><i class="fas fa-map-marker-alt"></i> Cognionix Innovations Pvt. Ltd., 1st Floor, Samruddhi Vertex, Mylasandra, Bengaluru – 560068</li>
+                        <li class="text-muted mb-2"><a href="tel:+917090887766" class="text-decoration-none text-muted"><i class="fas fa-phone"></i> +91-7090887766</a></li>
+                        <li class="text-muted mb-3"><i class="fas fa-envelope"></i> support@khilaunabazaar.com</li>
+                        <li><NavLink href="/contact" class="btn btn-sm btn-primary">Contact Page</NavLink></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="bg-secondary" />
+            <div class="text-center text-muted small">
+                <p class="mb-0">&copy; @DateTime.Now.Year KhilaunaBazaar. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</div>
+
+@code {
+    private void OnCartChanged() => InvokeAsync(StateHasChanged);
+
+    protected override void OnInitialized()
+    {
+        Cart.OnChange += OnCartChanged;
+    }
+
+    public void Dispose() => Cart.OnChange -= OnCartChanged;
+}

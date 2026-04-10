@@ -1,0 +1,121 @@
+@page "/cart"
+@inject CartService CartService
+@inject NavigationManager Nav
+
+<PageTitle>Shopping Cart - KhilaunaBazaar</PageTitle>
+
+<section class="py-5 bg-light">
+    <div class="container">
+        <h1 class="display-5 fw-bold mb-2"><i class="fas fa-shopping-cart"></i> Shopping Cart</h1>
+        <p class="text-muted">Review your selected items before checkout</p>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-8">
+                @if (_items.Count == 0)
+                {
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body text-center py-5">
+                            <i class="fas fa-shopping-cart fa-5x text-muted mb-3"></i>
+                            <h5 class="text-muted">Your cart is empty</h5>
+                            <p class="text-muted mb-4">Start shopping and add items to your cart!</p>
+                            <NavLink href="/" class="btn btn-primary">Continue Shopping</NavLink>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body">
+                            <table class="table table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                        <th>Subtotal</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in _items)
+                                    {
+                                        <tr>
+                                            <td><strong>@item.Name</strong></td>
+                                            <td>₹@item.Price.ToString("F2")</td>
+                                            <td>
+                                                <input type="number" class="form-control form-control-sm" style="width: 70px;" min="1" value="@item.Quantity"
+                                                       @onchange="e => UpdateQty(item.Id, e)" />
+                                            </td>
+                                            <td>₹@((item.Price * item.Quantity).ToString("F2"))</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-danger" @onclick="() => Remove(item.Id)">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="col-lg-4">
+                <div class="card shadow-sm border-0 sticky-top" style="top: 100px;">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">Order Summary</h5>
+                        <div class="d-flex justify-content-between mb-3"><span>Subtotal:</span><span>₹@_subtotal.ToString("F2")</span></div>
+                        <div class="d-flex justify-content-between mb-3"><span>Shipping:</span><span>₹@_shipping.ToString("F2")</span></div>
+                        <div class="d-flex justify-content-between mb-3"><span>Tax (10%):</span><span>₹@_tax.ToString("F2")</span></div>
+                        <hr />
+                        <div class="d-flex justify-content-between mb-4"><h6>Total:</h6><h6 class="text-primary">₹@_total.ToString("F2")</h6></div>
+                        <div class="d-grid gap-2">
+                            <NavLink href="/checkout" class="@("btn btn-primary btn-lg " + (_items.Count == 0 ? "disabled" : ""))">
+                                <i class="fas fa-lock"></i> Proceed to Checkout
+                            </NavLink>
+                            <NavLink href="/" class="btn btn-outline-primary">Continue Shopping</NavLink>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@code {
+    private IReadOnlyList<CartItem> _items = Array.Empty<CartItem>();
+    private decimal _subtotal => _items.Sum(i => i.Price * i.Quantity);
+    private decimal _shipping => _items.Count > 0 ? 5.99m : 0;
+    private decimal _tax => _subtotal * 0.10m;
+    private decimal _total => _subtotal + _shipping + _tax;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CartService.LoadAsync();
+        _items = CartService.Items;
+    }
+
+    protected override void OnParametersSet()
+    {
+        _items = CartService.Items;
+    }
+
+    private async Task UpdateQty(int productId, ChangeEventArgs e)
+    {
+        var q = int.TryParse(e.Value?.ToString(), out var val) ? val : 1;
+        await CartService.UpdateQuantityAsync(productId, q);
+        _items = CartService.Items;
+        StateHasChanged();
+    }
+
+    private async Task Remove(int productId)
+    {
+        await CartService.RemoveAsync(productId);
+        _items = CartService.Items;
+        StateHasChanged();
+    }
+}

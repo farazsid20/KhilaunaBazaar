@@ -1,0 +1,94 @@
+@page "/product/{Id:int}"
+@inject ApiClient Api
+@inject CartService Cart
+
+<PageTitle>@(_product?.Name ?? "Product") - KhilaunaBazaar</PageTitle>
+
+@if (_loading)
+{
+    <p class="p-4 text-center">Loading...</p>
+}
+else if (_product == null)
+{
+    <p class="p-4">Product not found. <NavLink href="/">Return home</NavLink></p>
+}
+else
+{
+    <section class="py-3 bg-light">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><NavLink href="/">Home</NavLink></li>
+                    <li class="breadcrumb-item"><NavLink href="@($"/category/{_product.CategorySlug}")">Category</NavLink></li>
+                    <li class="breadcrumb-item active">@_product.Name</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-5">
+                    <div class="img-placeholder" style="height: 400px; border-radius: 12px; padding: 0; overflow: hidden;">
+                        <img src="@_product.ImageUrl" alt="@_product.Name" style="width: 100%; height: 100%; object-fit: cover;" />
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <h1 class="display-6 fw-bold mb-2">@_product.Name</h1>
+                    <div class="mb-3">
+                        <span class="badge bg-success me-2">★ @_product.Rating</span>
+                    </div>
+                    <h3 class="text-primary mb-4">₹@_product.Price.ToString("F2")</h3>
+                    <p class="text-muted mb-4">@_product.Description</p>
+                    <div class="mb-4">
+                        <h6 class="mb-3">Quantity:</h6>
+                        <div class="d-flex align-items-center gap-2">
+                            <button class="btn btn-outline-primary" @onclick="DecreaseQty">−</button>
+                            <input type="number" class="form-control" style="width: 100px; text-align: center;" @bind="_quantity" min="1" />
+                            <button class="btn btn-outline-primary" @onclick="IncreaseQty">+</button>
+                        </div>
+                    </div>
+                    <div class="d-grid gap-3">
+                        <button class="btn btn-primary btn-lg" @onclick="AddToCart">
+                            <i class="fas fa-shopping-cart me-2"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private Product? _product;
+    private bool _loading = true;
+    private int _quantity = 1;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await Cart.LoadAsync();
+        try
+        {
+            _product = await Api.GetProductByIdAsync(Id);
+        }
+        catch
+        {
+            _product = null;
+        }
+        _loading = false;
+    }
+
+    private void IncreaseQty() => _quantity++;
+    private void DecreaseQty() { if (_quantity > 1) _quantity--; }
+
+    private async Task AddToCart()
+    {
+        if (_product == null) return;
+        await Cart.AddAsync(_product.Id, _product.Name, _product.Price, _quantity);
+        _quantity = 1;
+    }
+}

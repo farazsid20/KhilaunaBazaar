@@ -1,0 +1,76 @@
+@page "/checkout"
+@inject CartService Cart
+@inject NavigationManager Nav
+
+<PageTitle>Checkout - KhilaunaBazaar</PageTitle>
+
+<section class="py-5 bg-light">
+    <div class="container">
+        <h1 class="display-5 fw-bold mb-2"><i class="fas fa-credit-card"></i> Checkout</h1>
+        <p class="text-muted">Complete your purchase securely</p>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        @if (_items.Count == 0)
+        {
+            <div class="alert alert-info">Your cart is empty. <NavLink href="/">Continue shopping</NavLink>.</div>
+        }
+        else
+        {
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="card shadow-sm border-0 mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">Order Summary</h5>
+                            <ul class="list-group list-group-flush">
+                                @foreach (var item in _items)
+                                {
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <span>@item.Name x @item.Quantity</span>
+                                        <span>₹@((item.Price * item.Quantity).ToString("F2"))</span>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Total</h5>
+                            <p class="d-flex justify-content-between"><span>Subtotal:</span> ₹@_subtotal.ToString("F2")</p>
+                            <p class="d-flex justify-content-between"><span>Shipping:</span> ₹5.99</p>
+                            <p class="d-flex justify-content-between"><span>Tax:</span> ₹@_tax.ToString("F2")</p>
+                            <hr />
+                            <p class="d-flex justify-content-between fw-bold"><span>Total:</span> ₹@_total.ToString("F2")</p>
+                            <button class="btn btn-primary btn-lg w-100 mt-3" @onclick="PlaceOrder">
+                                <i class="fas fa-check me-2"></i> Place Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+@code {
+    private IReadOnlyList<CartItem> _items = Array.Empty<CartItem>();
+    private decimal _subtotal => _items.Sum(i => i.Price * i.Quantity);
+    private decimal _tax => _subtotal * 0.10m;
+    private decimal _total => _subtotal + 5.99m + _tax;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Cart.LoadAsync();
+        _items = Cart.Items;
+    }
+
+    private async Task PlaceOrder()
+    {
+        await Cart.ClearAsync();
+        Nav.NavigateTo("/order-confirmation", forceLoad: false);
+    }
+}

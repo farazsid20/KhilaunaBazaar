@@ -1,0 +1,20 @@
+<ErrorBoundary>
+    <ChildContent>
+        <Router AppAssembly="@typeof(App).Assembly" NotFoundPage="typeof(Pages.NotFound)">
+            <Found Context="routeData">
+                <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)"/>
+            </Found>
+            <NotFound>
+                <LayoutView Layout="@typeof(MainLayout)">
+                    <p class="p-4">Sorry, there's nothing at this address. <NavLink href="/">Return home</NavLink></p>
+                </LayoutView>
+            </NotFound>
+        </Router>
+    </ChildContent>
+    <ErrorContent>
+        <div class="p-4 m-4 alert alert-danger">
+            <h4>Something went wrong.</h4>
+            <p>Please <a href="/" class="alert-link">reload the page</a> or try again later.</p>
+        </div>
+    </ErrorContent>
+</ErrorBoundary>
